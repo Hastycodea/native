@@ -7,6 +7,7 @@ import {
   Text,
   View,
 } from "react-native";
+import MovieCard from "../../components/MovieCard";
 import SearchBar from "../../components/SearchBar";
 import { icons } from "../../constants/icons";
 import { images } from "../../constants/images";
@@ -25,6 +26,9 @@ export default function Index() {
       query: "",
     })
   );
+  console.log("🚀 ~ Index ~ movies:", movies);
+  // console.log("this is my token", process.env.EXPO_READ_ACCESS_TOKEN);
+  // console.log("Sample text", SAMPLE_TEXT);
 
   return (
     <View className="flex-1 bg-primary">
@@ -56,7 +60,17 @@ export default function Index() {
 
             <FlatList
               data={movies}
-              renderItem={({ item }) => <Text>{item.title}</Text>}
+              renderItem={({ item }) => <MovieCard {...item} />}
+              keyExtractor={(item) => item.id.toString()}
+              numColumns={3}
+              columnWrapperStyle={{
+                justifyContent: "flex-start",
+                gap: 20,
+                paddingRight: 5,
+                marginBottom: 10,
+              }}
+              className="mt-2 pb-32"
+              scrollEnabled={false}
             />
           </View>
         )}
