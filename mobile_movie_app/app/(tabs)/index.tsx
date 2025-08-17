@@ -1,5 +1,12 @@
 import { useRouter } from "expo-router";
-import { ActivityIndicator, Image, ScrollView, Text, View } from "react-native";
+import {
+  ActivityIndicator,
+  FlatList,
+  Image,
+  ScrollView,
+  Text,
+  View,
+} from "react-native";
 import SearchBar from "../../components/SearchBar";
 import { icons } from "../../constants/icons";
 import { images } from "../../constants/images";
@@ -43,9 +50,14 @@ export default function Index() {
               onPress={() => router.push("/search")}
               placeholder="Search for a movie"
             />
-            <Text className="text-white font-bold mt-5 mb-3">
+            <Text className="text-white text-lg font-bold mt-5 mb-3">
               Latest Movies
             </Text>
+
+            <FlatList
+              data={movies}
+              renderItem={({ item }) => <Text>{item.title}</Text>}
+            />
           </View>
         )}
       </ScrollView>
